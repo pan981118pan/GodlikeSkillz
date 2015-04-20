@@ -269,7 +269,6 @@ namespace GodlikeSkillz
             }
 
             CClass.Game_OnGameUpdate(args);
-            
             UseSummoners();
 
             //Items
