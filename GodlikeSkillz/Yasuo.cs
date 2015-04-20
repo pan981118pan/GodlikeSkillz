@@ -214,7 +214,7 @@ namespace GodlikeSkillz
 
             var vMinions = MinionManager.GetMinions(Player.Position, 950);
 
-            if (GetValue<StringList>("ELmode").SelectedIndex == 1 && E.IsReady())
+            if (GetValue<StringList>("ELmode").SelectedIndex >= 1 && E.IsReady())
             {
                 var min =
                     vMinions.Where(
