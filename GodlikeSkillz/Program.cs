@@ -178,7 +178,6 @@ namespace GodlikeSkillz
             }
 
             CClass.MainMenu(Config);
-
             Config.AddToMainMenu();
 
             Drawing.OnDraw += Drawing_OnDraw;
