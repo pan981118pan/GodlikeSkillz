@@ -42,7 +42,7 @@ namespace GodlikeSkillz
             {
                 case "yasuo":
                     CClass = new Yasuo();
-                    break;
+                    break;/*
                 case "ezreal":
                     CClass = new Ezreal();
                     break;
@@ -75,7 +75,7 @@ namespace GodlikeSkillz
                     break;
                 case "tristana":
                     CClass = new Tristana();
-                    break;
+                    break;*/
           }
 
 
