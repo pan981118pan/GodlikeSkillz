@@ -85,7 +85,7 @@ namespace GodlikeSkillz
                 if (cursorItem.Active)
                     Render.Circle.DrawCircle(Game.CursorPos, GetValue<Slider>("Cirsize").Value, cursorItem.Color);
                 if (targetItem.Active)
-                    Render.Circle.DrawCircle(YTarget.Position, 75, Orbwalking.InAutoAttackRange(Orbwalker.GetTarget()) ? targetItem.Color : Color.Red);
+                    Render.Circle.DrawCircle(YTarget.Position, 75, targetItem.Color);
             }
         }
 
