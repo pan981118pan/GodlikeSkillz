@@ -87,11 +87,6 @@ namespace GodlikeSkillz
                 if (targetItem.Active)
                     Render.Circle.DrawCircle(YTarget.Position, 75, Orbwalking.InAutoAttackRange(Orbwalker.GetTarget()) ? targetItem.Color : Color.Red);
             }
-           var tar = TargetSelector.GetTarget(950, TargetSelector.DamageType.Physical);
-            if (tar != null)
-            {
-                Render.Circle.DrawCircle(Q1.GetPrediction(tar).UnitPosition, 75, Color.Blue);
-            }
         }
 
         public void Game_OnProcessSpell(Obj_AI_Base unit, GameObjectProcessSpellCastEventArgs spell)
