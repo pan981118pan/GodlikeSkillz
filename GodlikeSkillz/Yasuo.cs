@@ -32,11 +32,11 @@ namespace GodlikeSkillz
         {
             Utils.PrintMessage("Yasuo loaded");
 
-            Q1 = new Spell(SpellSlot.Q, 475f);
+            Q1 = new Spell(SpellSlot.Q, 490f);
             Q2 = new Spell(SpellSlot.Q, 900f);
             W = new Spell(SpellSlot.W, 400f);
             E = new Spell(SpellSlot.E, 475f);
-            R = new Spell(SpellSlot.R, 1200f);
+            R = new Spell(SpellSlot.R, 1300f);
 
             Q1.SetSkillshot(0.45f, 50f, float.MaxValue, false, SkillshotType.SkillshotLine);
             Q2.SetSkillshot(0.45f, 50f, 1200f, false, SkillshotType.SkillshotLine);
@@ -85,7 +85,12 @@ namespace GodlikeSkillz
                 if (cursorItem.Active)
                     Render.Circle.DrawCircle(Game.CursorPos, GetValue<Slider>("Cirsize").Value, cursorItem.Color);
                 if (targetItem.Active)
-                    Render.Circle.DrawCircle(YTarget.Position, 75, targetItem.Color);
+                    Render.Circle.DrawCircle(YTarget.Position, 75, Orbwalking.InAutoAttackRange(Orbwalker.GetTarget()) ? targetItem.Color : Color.Red);
+            }
+           var tar = TargetSelector.GetTarget(950, TargetSelector.DamageType.Physical);
+            if (tar != null)
+            {
+                Render.Circle.DrawCircle(Q1.GetPrediction(tar).UnitPosition, 75, Color.Blue);
             }
         }
 
@@ -134,10 +139,17 @@ namespace GodlikeSkillz
 
             if (GetValue<bool>("UseQC") && (GetValue<KeyBind>("UseQHT").Active || ComboActive))
             {
-                AutoQ(
-                    HasWhirlwind()
-                        ? TargetSelector.GetTarget(950, TargetSelector.DamageType.Physical)
-                        : TargetSelector.GetTarget(475, TargetSelector.DamageType.Physical));
+                if (YTarget.IsValidTarget(HasWhirlwind() ? Q2.Range : Q1.Range))
+                {
+                    AutoQ(YTarget);
+                }
+                else
+                {
+                    AutoQ(
+                        HasWhirlwind()
+                            ? TargetSelector.GetTarget(Q2.Range, TargetSelector.DamageType.Physical)
+                            : TargetSelector.GetTarget(Q1.Range, TargetSelector.DamageType.Physical));
+                }
             }
 
             var targetLoc = Game.CursorPos;
@@ -320,11 +332,11 @@ namespace GodlikeSkillz
             {
                 if (Q1.IsReady() && !ECasting && !Player.IsDashing())
                 {
-                    if (!HasWhirlwind() && Player.Distance(targ) < 450 && AttackNow)
+                    if (!HasWhirlwind() && AttackNow)
                     {
                         Q1.Cast(targ);
                     }
-                    else if (HasWhirlwind() && Player.Distance(targ) < 950 && ComboActive)
+                    else if (HasWhirlwind() && ComboActive)
                     {
                         Q2.Cast(targ, false, true);
                     }

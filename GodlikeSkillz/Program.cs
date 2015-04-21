@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using LeagueSharp;
 using LeagueSharp.Common;
 using LeagueSharp.Common.Data;
-using GodlikeSkillz.Evade;
-using Activator = GodlikeSkillz.Activator;
 using Menu = LeagueSharp.Common.Menu;
 using MenuItem = LeagueSharp.Common.MenuItem;
 
