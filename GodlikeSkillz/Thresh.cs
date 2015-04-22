@@ -46,10 +46,12 @@ namespace GodlikeSkillz
             if (!unit.IsMe)
                 return;
 
-            if (castedSpell.SData.Name == Player.Spellbook.GetSpell(SpellSlot.E).Name)
-            {
-                ECast = true;
-
+            if (castedSpell.SData.Name == Player.Spellbook.GetSpell(SpellSlot.W).Name)
+            {                
+                var target = TargetSelector.GetTarget(300, TargetSelector.DamageType.Physical);
+                if (target != null)
+                {
+                    ECast = true;
                     var tiamatId = ItemData.Tiamat_Melee_Only.Id;
                     var hydraId = ItemData.Ravenous_Hydra_Melee_Only.Id;
                     var hasTiamat = Items.HasItem(tiamatId);
@@ -60,6 +62,7 @@ namespace GodlikeSkillz
                         var itemId = hasTiamat ? tiamatId : hydraId;
                         Items.UseItem(itemId);
                     }
+                }
             }
         }
 

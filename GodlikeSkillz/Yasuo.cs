@@ -179,7 +179,7 @@ namespace GodlikeSkillz
                     {
                         if (!Orbwalker.InAutoAttackRange(YTarget))
                         {
-                            DashToLoc(YTarget.Position, dashList, false);
+                            DashToLoc(Prediction.GetPrediction(YTarget, 0.4f).UnitPosition, dashList, false);
                             var pLoc = Prediction.GetPrediction(YTarget, 0.1f, 175, 600).UnitPosition;
                             MoveTo(pLoc, Orbwalking.GetRealAutoAttackRange(YTarget) / 2);
                         }

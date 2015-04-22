@@ -64,6 +64,9 @@ namespace GodlikeSkillz
                 case "leesin":
                     CClass = new Thresh();
                     break;
+                case "rengar":
+                    CClass = new Thresh();
+                    break;
                 case "zed":
                     CClass = new Zed();
                     break;
