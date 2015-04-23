@@ -29,6 +29,7 @@ namespace GodlikeSkillz.Evade
         public int Delay;
         public bool DisableFowDetection = false;
         public bool DontAddExtraDuration;
+        public bool DontCheckForDuplicates = false;
         public bool DontCross = false;
         public bool DontRemove = false;
         public int ExtraDuration;

@@ -790,7 +790,29 @@ namespace GodlikeSkillz.Evade
 
             #endregion Darius
 
-            //TODO: Add Diana Q
+            #region Diana
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Diana",
+                    SpellName = "DianaArc",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotCircle,
+                    Delay = 250,
+                    Range = 895,
+                    Radius = 195,
+                    MissileSpeed = 1600,
+                    FixedRange = true,
+                    AddHitbox = true,
+                    DangerValue = 3,
+                    IsDangerous = true,
+                    MissileSpellName = "DianaArc",
+                    FromObjects = new[] { "Diana_Q_Trail.troy" },
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Diana
 
             #region DrMundo
 
@@ -2168,24 +2190,25 @@ namespace GodlikeSkillz.Evade
                     IsDangerous = false,
                     MissileSpellName = "LucianQ",
                 });
-            //TODO: Add Lucian R
+
             Spells.Add(
                 new SpellData
                 {
                     ChampionName = "Lucian",
-                    SpellName = "LucianR",
+                    SpellName = "LucianRMis",
                     Slot = SpellSlot.R,
                     Type = SkillShotType.SkillshotMissileLine,
-                    Delay = 250,
+                    Delay = 500,
                     Range = 1400,
-                    Radius = 65,
-                    MissileSpeed = 2200,
+                    Radius = 110,
+                    MissileSpeed = 2800,
                     FixedRange = true,
                     AddHitbox = true,
-                    DangerValue = 3,
-                    IsDangerous = true,
-                    MissileSpellName = "",
-                    CanBeRemoved = true,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "lucianrmissileoffhand",
+                    ExtraMissileNames = new[] { "lucianrmissile" },
+                    DontCheckForDuplicates = true,
                     CollisionObjects =
                         new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall },
                 });
@@ -3732,7 +3755,26 @@ namespace GodlikeSkillz.Evade
             #endregion Vayne
 
             #region Veigar
-            //TODO: ADD Veigar Q
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Veigar",
+                    SpellName = "VeigarBalefulStrike",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotMissileLine,
+                    Delay = 250,
+                    Range = 950,
+                    Radius = 70,
+                    MissileSpeed = 2000,
+                    FixedRange = true,
+                    AddHitbox = true,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "VeigarBalefulStrikeMis",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
+                });
+
             Spells.Add(
                 new SpellData
                 {
