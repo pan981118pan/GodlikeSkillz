@@ -22,9 +22,10 @@ namespace GodlikeSkillz
         public bool ToggleActive;
         public Orbwalking.Orbwalker Orbwalker;
         private static int _lastMoveCommandT;
-        private const int Delay = 150;
+        private const int Delay = 80;   
         private static readonly Random Random = new Random(DateTime.Now.Millisecond);
         public bool AttackNow;
+        public bool CanMove = true;
         public float AttackReadiness;
         public bool UsesMana = true;
         private const float MinDistance = 400;
@@ -117,7 +118,7 @@ namespace GodlikeSkillz
 
         public void MoveByTarget(Obj_AI_Base target)
         {
-            if (target.IsValidTarget())
+            if (target.IsValidTarget() && CanMove)
             {
                 var enemyPos = target.Position;
                 var mousePos = Game.CursorPos;
@@ -160,7 +161,7 @@ namespace GodlikeSkillz
             var point = Player.ServerPosition +
                         ((Random.NextFloat(0.6f, 1) + 0.2f) * MinDistance) *
                         (pVector3.To2D() - Player.ServerPosition.To2D()).Normalized().To3D();
-
+            if(CanMove)
             Player.IssueOrder(GameObjectOrder.MoveTo, point);
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using GodlikeSkillz.Evade;
 using LeagueSharp;
 using LeagueSharp.Common;
 using LeagueSharp.Common.Data;
@@ -187,7 +189,41 @@ namespace GodlikeSkillz
             Orbwalking.AfterAttack += OrbwalkingAfterAttack;
             Orbwalking.OnAttack += OrbwalkingOnAttack;
             Orbwalking.BeforeAttack += OrbwalkingBeforeAttack;
+            //GameObject.OnCreate += ObjSpellMissileOnOnCreate;
+            //Obj_AI_Base.OnProcessSpellCast += OnProcessSpell;
             
+        }
+
+        private static void ObjSpellMissileOnOnCreate(GameObject sender, EventArgs args)
+        {
+            if (!sender.IsValid || !(sender is Obj_SpellMissile))
+            {
+                return; //not sure if needed
+            }
+
+            var missile = (Obj_SpellMissile)sender;
+
+            Game.PrintChat("Missile Name is: " + missile.Name);
+            
+            var unit = missile.SpellCaster;
+            if (!unit.IsMe)
+            {
+                return;
+            }
+            Game.PrintChat("Missile Name is: " + missile.Name);
+
+            //Trigger the skillshot detection callbacks.
+        }
+
+        private static void OnProcessSpell(Obj_AI_Base unit, GameObjectProcessSpellCastEventArgs spell)
+        {
+            if (!unit.IsMe)
+                return;
+            if (spell.SData.Name.Contains("Attack"))
+            {
+                return;
+            }
+            Game.PrintChat("Spell Name is: " + spell.SData.Name);
         }
 
         private static void GameOnOnWndProc(WndEventArgs args)
@@ -237,6 +273,17 @@ namespace GodlikeSkillz
             CClass.AttackReadiness = 1 - (Math.Max(0,
                 (Orbwalking.LastAATick + ObjectManager.Player.AttackDelay * 1000 - LeagueSharp.Common.Utils.TickCount +
                      (float)Game.Ping / 2 + 25)) / (ObjectManager.Player.AttackDelay * 1000 + (float)Game.Ping / 2 + 25));
+
+
+            /*foreach (var particle in ObjectManager.Get<Obj_GeneralParticleEmitter>())
+            {
+                if (!particle.Name.Contains("Mfx") && !particle.Name.Contains("env") && !particle.Name.Contains("audio"))
+                {
+                    Drawing.DrawText(
+                        Drawing.WorldToScreen(particle.Position)[0] + 50,
+                        Drawing.WorldToScreen(particle.Position)[1] - 20, Color.Yellow, "" + particle.Name);
+                }
+            }*/
 
             if (ObjectManager.Player.IsDead)
             {
@@ -369,7 +416,10 @@ namespace GodlikeSkillz
         private static void OrbwalkingAfterAttack(AttackableUnit unit, AttackableUnit target)
         {
             if (unit.IsMe)
+            {
+                CClass.CanMove = true;
                 CClass.AttackNow = true;
+            }
             CClass.Orbwalking_AfterAttack(unit, target);
         }
 
@@ -392,6 +442,7 @@ namespace GodlikeSkillz
 
         private static void OrbwalkingBeforeAttack(Orbwalking.BeforeAttackEventArgs args)
         {
+            CClass.CanMove = false;
             CClass.AttackNow = false;
             CClass.Orbwalking_BeforeAttack(args);
         }

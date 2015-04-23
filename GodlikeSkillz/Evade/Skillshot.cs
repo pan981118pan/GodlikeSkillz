@@ -89,13 +89,16 @@ namespace GodlikeSkillz.Evade
         public SpellData SpellData;
         public Vector2 Start;
         public int StartTick;
+        public Obj_AI_Base Target;
 
         public Skillshot(DetectionType detectionType,
             SpellData spellData,
             int startT,
             Vector2 start,
             Vector2 end,
-            Obj_AI_Base unit)
+            Obj_AI_Base unit,
+            Obj_AI_Base target = null
+            )
         {
             DetectionType = detectionType;
             SpellData = spellData;
@@ -104,7 +107,7 @@ namespace GodlikeSkillz.Evade
             End = end;
             MissilePosition = start;
             Direction = (end - start).Normalized();
-
+            Target = target;
             Unit = unit;
 
             //Create the spatial object for each type of skillshot.
@@ -172,6 +175,12 @@ namespace GodlikeSkillz.Evade
             if (SpellData.MissileAccel != 0)
             {
                 return Environment.TickCount <= StartTick + 5000;
+            }
+            if (Target != null)
+            {
+                return Environment.TickCount <=
+                   StartTick + SpellData.Delay + SpellData.ExtraDuration +
+                   1000 * (Start.Distance(Target.Position) / SpellData.MissileSpeed);
             }
 
             return Environment.TickCount <=
@@ -517,6 +526,13 @@ namespace GodlikeSkillz.Evade
             var timeToExplode = SpellData.ExtraDuration + SpellData.Delay +
                                 (int) ((1000 * Start.Distance(End)) / SpellData.MissileSpeed) -
                                 (Environment.TickCount - StartTick);
+
+            if (Target != null)
+            {
+                timeToExplode = SpellData.ExtraDuration + SpellData.Delay +
+                                (int) ((1000 * Start.Distance(Target)) / SpellData.MissileSpeed) -
+                                (Environment.TickCount - StartTick);
+            }
             return timeToExplode <= time;
         }
     }

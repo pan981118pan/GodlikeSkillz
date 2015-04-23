@@ -41,6 +41,7 @@ namespace GodlikeSkillz.Evade
         public string[] FromObjects = { };
         public int Id = -1;
         public bool Invert;
+        public bool Targeted;
         public bool IsDangerous = false;
         public int MissileAccel = 0;
         public bool MissileDelayed;
@@ -48,6 +49,7 @@ namespace GodlikeSkillz.Evade
         public int MissileMaxSpeed;
         public int MissileMinSpeed;
         public int MissileSpeed;
+        public string ProjectileParticleName = "";
         public string MissileSpellName = "";
         public float MultipleAngle;
         public int MultipleNumber = -1;

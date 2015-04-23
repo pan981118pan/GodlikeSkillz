@@ -38,8 +38,8 @@ namespace GodlikeSkillz
             E = new Spell(SpellSlot.E, 475f);
             R = new Spell(SpellSlot.R, 1300f);
 
-            Q1.SetSkillshot(0.45f, 50f, float.MaxValue, false, SkillshotType.SkillshotLine);
-            Q2.SetSkillshot(0.45f, 50f, 1200f, false, SkillshotType.SkillshotLine);
+            Q1.SetSkillshot(0.3f, 1f, float.MaxValue, false, SkillshotType.SkillshotLine);
+            Q2.SetSkillshot(0.3f, 50f, 1200f, false, SkillshotType.SkillshotLine);
 
             UsesMana = false;
             new YasuoEvade();
@@ -111,7 +111,7 @@ namespace GodlikeSkillz
         {
             /*Drawing.DrawText(
                     Drawing.WorldToScreen(Player.Position)[0] + 50,
-                    Drawing.WorldToScreen(Player.Position)[1] - 20, Color.Yellow, "" + (E.Instance.CooldownExpires - Game.Time));*/
+                    Drawing.WorldToScreen(Player.Position)[1] - 20, Color.Yellow, "" + textl);*/
 
             EvadeDetectedSkillshots.RemoveAll(skillshot => !skillshot.IsActive());
             Evader();
@@ -136,7 +136,8 @@ namespace GodlikeSkillz
             {
                 if (YTarget.IsValidTarget(HasWhirlwind() ? Q2.Range : Q1.Range))
                 {
-                    AutoQ(YTarget);
+                    if (HasWhirlwind() || YTarget.HasBuff("YasuoDashWrapper") || Orbwalker.InAutoAttackRange(YTarget))
+                        AutoQ(YTarget);
                 }
                 else
                 {
@@ -173,17 +174,17 @@ namespace GodlikeSkillz
                 Orbwalker.SetMovement(false);
                 if (YTarget.IsValidTarget())
                 {
-                    Orbwalker.SetAttack(
-                        Orbwalker.GetTarget().IsValidTarget() && Orbwalker.GetTarget().NetworkId == YTarget.NetworkId);
+                    if (Orbwalker.GetTarget().IsValidTarget() && Orbwalker.GetTarget().NetworkId == YTarget.NetworkId)
+                        Orbwalker.SetAttack(true);
                     if (Orbwalking.CanMove(50))
                     {
                         if (!Orbwalker.InAutoAttackRange(YTarget))
                         {
                             DashToLoc(Prediction.GetPrediction(YTarget, 0.4f).UnitPosition, dashList, false);
                             var pLoc = Prediction.GetPrediction(YTarget, 0.1f, 175, 600).UnitPosition;
-                            MoveTo(pLoc, Orbwalking.GetRealAutoAttackRange(YTarget) / 2);
+                            MoveTo(pLoc);
                         }
-                        else
+                        else if(AttackReadiness > 0.3)
                         {
                             MoveByTarget(YTarget);
                         }
@@ -191,13 +192,14 @@ namespace GodlikeSkillz
                 }
                 else
                 {
-                    MoveTo(targetLoc, 100);
-                    DashToLoc(targetLoc, dashList, false);
                     Orbwalker.SetAttack(false);
+                    MoveTo(targetLoc);
+                    DashToLoc(targetLoc, dashList, false);           
                 }
             }
             else
             {
+                CanMove = true;
                 Orbwalker.SetAttack(true);
                 Orbwalker.SetMovement(true);
             }
@@ -344,7 +346,7 @@ namespace GodlikeSkillz
             if(!GetValue<bool>("UseEC"))
                 return;
             Obj_AI_Base[] eMinion = { null };
-            foreach (var o in from o in list where Player.Distance(o) < 475 && Player.ServerPosition.Distance(o.ServerPosition) > 45
+            foreach (var o in from o in list where Player.Distance(o) < E.Range && Player.ServerPosition.Distance(o.ServerPosition) > 45
                               let ePos = GetDashingEnd(o).To3D()
                               where targetLoc.Distance(ePos) < (Math.Abs(Player.Distance(targetLoc) - (Player.MoveSpeed*0.4))) && (!turrets || !ePos.UnderTurret(true))
                                       where eMinion[0] == null || targetLoc.Distance(ePos) < targetLoc.Distance(GetDashingEnd(eMinion[0]).To3D()) select o) 
@@ -469,15 +471,25 @@ namespace GodlikeSkillz
 
                 if (GetValue<bool>("autoww" + "." + skillshot.SpellData.ChampionName + "." + skillshot.SpellData.Slot))
                 {
-                    
-                    if (!skillshot.IsAboutToHit(isAboutToHitRange, Player))
+                    if (skillshot.Target != null && skillshot.Target.IsMe)
                     {
-                        return;
+                        /*if (!skillshot.IsAboutToHit(700, Player))
+                        {
+                            return;
+                        }*/
+                        W.Cast(skillshot.Start);
                     }
-                    var cast = Player.ServerPosition +
-                               Vector3.Normalize(skillshot.MissilePosition.To3D() - Player.ServerPosition) *
-                               10;
-                    W.Cast(skillshot.MissilePosition.To3D());
+                    else
+                    {
+
+                        if (!skillshot.IsAboutToHit(isAboutToHitRange, Player))
+                        {
+                            return;
+                        }
+                        var cast = Player.ServerPosition +
+                                   Vector3.Normalize(skillshot.MissilePosition.To3D() - Player.ServerPosition) * 10;
+                        W.Cast(skillshot.MissilePosition.To3D());
+                    }
                 }
 
             }
@@ -532,7 +544,7 @@ namespace GodlikeSkillz
         {
 
             config.AddItem(new MenuItem("autoww" + Id, "Use Auto Windwall")).SetValue(true);
-            config.AddItem(new MenuItem("wwdelay" + Id, "Windwall Delay")).SetValue(new Slider(500, 150, 2000));
+            config.AddItem(new MenuItem("wwdelay" + Id, "Windwall NonDelay")).SetValue(new Slider(500, 150, 2000));
 
             var enemies = ObjectManager.Get<Obj_AI_Hero>().Where(e => e.IsEnemy);
 

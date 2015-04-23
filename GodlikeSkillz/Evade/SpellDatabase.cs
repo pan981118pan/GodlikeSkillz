@@ -69,6 +69,7 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 3,
                     IsDangerous = false,
                     MissileSpellName = "AatroxEConeMissile",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             #endregion Aatrox
@@ -147,6 +148,30 @@ namespace GodlikeSkillz.Evade
 
             #endregion Ahri
 
+            #region Akali
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Akali",
+                    SpellName = "AkaliMota",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 600,
+                    Radius = 60,
+                    MissileSpeed = 1000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Akali
+
             #region Amumu
 
             Spells.Add(
@@ -212,6 +237,26 @@ namespace GodlikeSkillz.Evade
                     CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Anivia",
+                    SpellName = "FrostBite",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 650,
+                    Radius = 60,
+                    MissileSpeed = 1200,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
             #endregion Anivia
 
             #region Annie
@@ -232,6 +277,8 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             Spells.Add(
@@ -293,6 +340,7 @@ namespace GodlikeSkillz.Evade
                     MultipleNumber = 7,
                     MultipleAngle = 9.58f * (float)Math.PI / 180,
                     CanBeRemoved = false,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             Spells.Add(
@@ -316,6 +364,48 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Ashe
+
+            #region Bard
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Bard",
+                    SpellName = "BardQ",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotMissileLine,
+                    Delay = 250,
+                    Range = 950,
+                    Radius = 60,
+                    MissileSpeed = 1600,
+                    FixedRange = true,
+                    AddHitbox = true,
+                    DangerValue = 3,
+                    IsDangerous = true,
+                    MissileSpellName = "BardQMissile",
+                    CanBeRemoved = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Bard",
+                    SpellName = "BardR",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotCircle,
+                    Delay = 500,
+                    Range = 3400,
+                    Radius = 350,
+                    MissileSpeed = 2100,
+                    FixedRange = false,
+                    AddHitbox = true,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "BardR",
+                });
+
+            #endregion
 
             #region Blitzcrank
 
@@ -399,6 +489,26 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "",
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Brand",
+                    SpellName = "BrandWildfire",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 750,
+                    Radius = 60,
+                    MissileSpeed = 1000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             #endregion Brand
@@ -489,6 +599,26 @@ namespace GodlikeSkillz.Evade
                         new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall }
                 });
 
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Caitlyn",
+                    SpellName = "CaitlynHeadshotMissile",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 1000,
+                    Range = 3000,
+                    Radius = 60,
+                    MissileSpeed = 2000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
             #endregion Caitlyn
 
             #region Cassiopeia
@@ -510,6 +640,26 @@ namespace GodlikeSkillz.Evade
                     IsDangerous = false,
                     MissileSpellName = "CassiopeiaNoxiousBlast",
                 });
+            //TODO: Cass E
+            /*Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Akali",
+                    SpellName = "AkaliMota",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 600,
+                    Radius = 60,
+                    MissileSpeed = 1000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });*/
 
             Spells.Add(
                 new SpellData
@@ -639,6 +789,8 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Darius
+
+            //TODO: Add Diana Q
 
             #region DrMundo
 
@@ -845,6 +997,30 @@ namespace GodlikeSkillz.Evade
 
             #endregion Fizz
 
+            #region FiddleSticks
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "FiddleSticks",
+                    SpellName = "FiddlesticksDarkWind",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 750,
+                    Radius = 60,
+                    MissileSpeed = 1100,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion FiddleSticks
+
             #region Galio
 
             Spells.Add(
@@ -863,6 +1039,7 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "GalioResoluteSmite",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             Spells.Add(
@@ -903,6 +1080,8 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Galio
+
+            //TODO: Add Gangplank Q
 
             #region Gnar
 
@@ -1069,6 +1248,7 @@ namespace GodlikeSkillz.Evade
                     ExtraDuration = 4500,
                     ToggleParticleName = "Gragas_",
                     DontCross = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             Spells.Add(
@@ -1355,7 +1535,7 @@ namespace GodlikeSkillz.Evade
                     CollisionObjects =
                         new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall },
                 });
-
+            //TODO: Add Chompers
             Spells.Add(
                 new SpellData
                 {
@@ -1485,6 +1665,26 @@ namespace GodlikeSkillz.Evade
                 new SpellData
                 {
                     ChampionName = "Kassadin",
+                    SpellName = "NullLance",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 650,
+                    Radius = 60,
+                    MissileSpeed = 1400,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Kassadin",
                     SpellName = "RiftWalk",
                     Slot = SpellSlot.R,
                     Type = SkillShotType.SkillshotCircle,
@@ -1500,6 +1700,73 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Kassadin
+
+            #region Katarina
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Katarina",
+                    SpellName = "KatarinaQ",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 675,
+                    Radius = 60,
+                    MissileSpeed = 1800,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Katarina",
+                    SpellName = "KatarinaR",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 550,
+                    Radius = 60,
+                    MissileSpeed = 1800,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Katarina
+
+            #region Kayle
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Kayle",
+                    SpellName = "JudicatorReckoning",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 650,
+                    Radius = 60,
+                    MissileSpeed = 1500,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Kayle
 
             #region Kennen
 
@@ -1577,7 +1844,7 @@ namespace GodlikeSkillz.Evade
             Spells.Add(
                 new SpellData
                 {
-                    ChampionName = "Kogmaw",
+                    ChampionName = "KogMaw",
                     SpellName = "KogMawQ",
                     Slot = SpellSlot.Q,
                     Type = SkillShotType.SkillshotMissileLine,
@@ -1598,7 +1865,7 @@ namespace GodlikeSkillz.Evade
             Spells.Add(
                 new SpellData
                 {
-                    ChampionName = "Kogmaw",
+                    ChampionName = "KogMaw",
                     SpellName = "KogMawVoidOoze",
                     Slot = SpellSlot.E,
                     Type = SkillShotType.SkillshotMissileLine,
@@ -1617,7 +1884,7 @@ namespace GodlikeSkillz.Evade
             Spells.Add(
                 new SpellData
                 {
-                    ChampionName = "Kogmaw",
+                    ChampionName = "KogMaw",
                     SpellName = "KogMawLivingArtillery",
                     Slot = SpellSlot.R,
                     Type = SkillShotType.SkillshotCircle,
@@ -1635,6 +1902,46 @@ namespace GodlikeSkillz.Evade
             #endregion Kogmaw
 
             #region Leblanc
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Leblanc",
+                    SpellName = "LeblancChaosOrb",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 700,
+                    Radius = 60,
+                    MissileSpeed = 2000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Leblanc",
+                    SpellName = "LeblancChaosOrbM",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 700,
+                    Radius = 60,
+                    MissileSpeed = 2000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
 
             Spells.Add(
                 new SpellData
@@ -1861,6 +2168,27 @@ namespace GodlikeSkillz.Evade
                     IsDangerous = false,
                     MissileSpellName = "LucianQ",
                 });
+            //TODO: Add Lucian R
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Lucian",
+                    SpellName = "LucianR",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotMissileLine,
+                    Delay = 250,
+                    Range = 1400,
+                    Radius = 65,
+                    MissileSpeed = 2200,
+                    FixedRange = true,
+                    AddHitbox = true,
+                    DangerValue = 3,
+                    IsDangerous = true,
+                    MissileSpellName = "",
+                    CanBeRemoved = true,
+                    CollisionObjects =
+                        new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall },
+                });
 
             #endregion Lucian
 
@@ -1886,6 +2214,26 @@ namespace GodlikeSkillz.Evade
                     CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Lulu",
+                    SpellName = "LuluW",
+                    Slot = SpellSlot.W,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 650,
+                    Radius = 60,
+                    MissileSpeed = 2000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
             #endregion Lulu
 
             #region Lux
@@ -1906,8 +2254,8 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 3,
                     IsDangerous = true,
                     MissileSpellName = "LuxLightBindingMis",
-                    //CanBeRemoved = true,
-                    //CollisionObjects = new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall, },
+                    CanBeRemoved = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall },
                 });
 
             Spells.Add(
@@ -1959,6 +2307,26 @@ namespace GodlikeSkillz.Evade
                 new SpellData
                 {
                     ChampionName = "Malphite",
+                    SpellName = "SeismicShard",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 625,
+                    Radius = 60,
+                    MissileSpeed = 1200,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Malphite",
                     SpellName = "UFSlash",
                     Slot = SpellSlot.R,
                     Type = SkillShotType.SkillshotCircle,
@@ -1997,6 +2365,52 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Malzahar
+
+            #region MissFortune
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "MissFortune",
+                    SpellName = "MissFortuneScattershot",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 800,
+                    Radius = 60,
+                    MissileSpeed = 1400,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+            //TODO: Add MF R
+            Spells.Add(
+               new SpellData
+               {
+                   ChampionName = "MissFortune",
+                   SpellName = "MissFortuneBulletTime",
+                   Slot = SpellSlot.R,
+                   Type = SkillShotType.SkillshotMissileLine,
+                   Delay = 250,
+                   Range = 1400,
+                   Radius = 60,
+                   MissileSpeed = 1100,
+                   FixedRange = true,
+                   AddHitbox = true,
+                   DangerValue = 2,
+                   IsDangerous = false,
+                   MissileSpellName = "",
+                   MultipleNumber = 6,
+                   MultipleAngle = 9.58f * (float)Math.PI / 180,
+                   CanBeRemoved = true,
+                   CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+               });
+
+            #endregion MissFortune
 
             #region Morgana
 
@@ -2041,6 +2455,7 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 3,
                     IsDangerous = true,
                     MissileSpellName = "namiqmissile",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             Spells.Add(
@@ -2114,6 +2529,55 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Nidalee
+
+            #region Nocturne
+            //TODO: ADD Nocturne Q
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Nocturne",
+                    SpellName = "NocturneDuskbringer",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotMissileLine,
+                    Delay = 125,
+                    Range = 1200,
+                    Radius = 60,
+                    MissileSpeed = 1600,
+                    FixedRange = true,
+                    AddHitbox = true,
+                    DangerValue = 3,
+                    IsDangerous = true,
+                    MissileSpellName = "",
+                    CanBeRemoved = true,
+                    CollisionObjects =
+                        new[] { CollisionObjectTypes.YasuoWall },
+                });
+
+            #endregion Nocturne
+
+            #region Nunu
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Nunu",
+                    SpellName = "IceBlast",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 550,
+                    Radius = 60,
+                    MissileSpeed = 1000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Nunu
 
             #region Olaf
 
@@ -2216,7 +2680,6 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "orianaredact",
-                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             Spells.Add(
@@ -2239,6 +2702,30 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Orianna
+
+            #region Pantheon
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Pantheon",
+                    SpellName = "PantheonQ",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 600,
+                    Radius = 60,
+                    MissileSpeed = 1400,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Pantheon
 
             #region Quinn
 
@@ -2388,6 +2875,50 @@ namespace GodlikeSkillz.Evade
 
             #endregion Rumble
 
+            #region Ryze
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Ryze",
+                    SpellName = "Overload",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 625,
+                    Radius = 60,
+                    MissileSpeed = 1400,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Ryze",
+                    SpellName = "SpellFlux",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 600,
+                    Radius = 60,
+                    MissileSpeed = 1000,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Ryze
+
             #region Sejuani
 
             Spells.Add(
@@ -2408,7 +2939,7 @@ namespace GodlikeSkillz.Evade
                     MissileSpellName = "",
                     ExtraRange = 200,
                     CollisionObjects =
-                        new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion, CollisionObjectTypes.YasuoWall },
+                        new[] { CollisionObjectTypes.Champion, CollisionObjectTypes.Minion },
                 });
             //TODO: fix?
             Spells.Add(
@@ -2432,6 +2963,30 @@ namespace GodlikeSkillz.Evade
                 });
 
             #endregion Sejuani
+
+            #region Shaco
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Shaco",
+                    SpellName = "TwoShivPoison",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 625,
+                    Radius = 60,
+                    MissileSpeed = 1200,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Shaco
 
             #region Sion
 
@@ -2486,6 +3041,26 @@ namespace GodlikeSkillz.Evade
                 new SpellData
                 {
                     ChampionName = "Shen",
+                    SpellName = "ShenVorpalStar",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 475,
+                    Radius = 60,
+                    MissileSpeed = 1500,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Shen",
                     SpellName = "ShenShadowDash",
                     Slot = SpellSlot.E,
                     Type = SkillShotType.SkillshotMissileLine,
@@ -2500,7 +3075,7 @@ namespace GodlikeSkillz.Evade
                     MissileSpellName = "ShenShadowDash",
                     ExtraRange = 200,
                     CollisionObjects =
-                        new[] { CollisionObjectTypes.Minion, CollisionObjectTypes.Champion, CollisionObjectTypes.YasuoWall },
+                        new[] { CollisionObjectTypes.Minion, CollisionObjectTypes.Champion },
                 });
 
             #endregion Shen
@@ -2644,6 +3219,26 @@ namespace GodlikeSkillz.Evade
                 new SpellData
                 {
                     ChampionName = "Swain",
+                    SpellName = "SwainTorment",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 625,
+                    Radius = 60,
+                    MissileSpeed = 1400,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Swain",
                     SpellName = "SwainShadowGrasp",
                     Slot = SpellSlot.W,
                     Type = SkillShotType.SkillshotCircle,
@@ -2696,6 +3291,7 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "syndrawcast",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             Spells.Add(
@@ -2736,6 +3332,26 @@ namespace GodlikeSkillz.Evade
                     MissileSpellName = "SyndraE",
                 });
 
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Syndra",
+                    SpellName = "SyndraR",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 750,
+                    Radius = 60,
+                    MissileSpeed = 1100,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
             #endregion Syndra
 
             #region Talon
@@ -2758,6 +3374,7 @@ namespace GodlikeSkillz.Evade
                     MultipleNumber = 3,
                     MultipleAngle = 20 * (float)Math.PI / 180,
                     MissileSpellName = "talonrakemissileone",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             Spells.Add(
@@ -2779,8 +3396,56 @@ namespace GodlikeSkillz.Evade
                     MultipleAngle = 20 * (float)Math.PI / 180,
                     MissileSpellName = "talonrakemissiletwo",
                 });
+            //TODO: ADD Talon R
+            #endregion Talon
 
-            #endregion Riven
+            #region Taric
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Taric",
+                    SpellName = "Dazzle",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 625,
+                    Radius = 60,
+                    MissileSpeed = 1400,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Taric
+
+            #region Teemo
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Teemo",
+                    SpellName = "BlindingDart",
+                    Slot = SpellSlot.Q,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 580,
+                    Radius = 60,
+                    MissileSpeed = 1500,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Teemo
 
             #region Thresh
 
@@ -2827,7 +3492,7 @@ namespace GodlikeSkillz.Evade
             #endregion Thresh
 
             #region Tristana
-
+            //TODO: ADD Trist E
             Spells.Add(
                 new SpellData
                 {
@@ -2844,6 +3509,26 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "RocketJump",
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Tristana",
+                    SpellName = "BusterShot",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 650,
+                    Radius = 60,
+                    MissileSpeed = 1550,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             #endregion Tristana
@@ -2937,6 +3622,7 @@ namespace GodlikeSkillz.Evade
                     IsDangerous = false,
                     MissileSpellName = "UrgotHeatseekingLineMissile",
                     CanBeRemoved = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             Spells.Add(
@@ -2955,6 +3641,7 @@ namespace GodlikeSkillz.Evade
                     DangerValue = 2,
                     IsDangerous = false,
                     MissileSpellName = "UrgotPlasmaGrenadeBoom",
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             #endregion Urgot
@@ -3020,8 +3707,32 @@ namespace GodlikeSkillz.Evade
 
             #endregion Varus
 
-            #region Veigar
+            #region Vayne
 
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Vayne",
+                    SpellName = "VayneCondemn",
+                    Slot = SpellSlot.E,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 625,
+                    Radius = 60,
+                    MissileSpeed = 1200,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
+                });
+
+            #endregion Vayne
+
+            #region Veigar
+            //TODO: ADD Veigar Q
             Spells.Add(
                 new SpellData
                 {
@@ -3060,6 +3771,26 @@ namespace GodlikeSkillz.Evade
                     ExtraDuration = 3000,
                     DontCross = true,
                     MissileSpellName = "",
+                });
+
+            Spells.Add(
+                new SpellData
+                {
+                    ChampionName = "Veigar",
+                    SpellName = "VeigarBalefulStrike",
+                    Slot = SpellSlot.R,
+                    Type = SkillShotType.SkillshotLine,
+                    Delay = 250,
+                    Range = 650,
+                    Radius = 60,
+                    MissileSpeed = 1500,
+                    FixedRange = false,
+                    AddHitbox = false,
+                    DangerValue = 2,
+                    IsDangerous = false,
+                    MissileSpellName = "",
+                    Targeted = true,
+                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall }
                 });
 
             #endregion Veigar
@@ -3499,7 +4230,6 @@ namespace GodlikeSkillz.Evade
                     IsDangerous = false,
                     MissileSpellName = "ZiggsR",
                     DisableFowDetection = true,
-                    CollisionObjects = new[] { CollisionObjectTypes.YasuoWall },
                 });
 
             #endregion Ziggs

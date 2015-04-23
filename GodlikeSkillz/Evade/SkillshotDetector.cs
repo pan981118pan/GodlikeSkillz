@@ -165,9 +165,10 @@ namespace GodlikeSkillz.Evade
             int startT,
             Vector2 start,
             Vector2 end,
-            Obj_AI_Base unit)
+            Obj_AI_Base unit,
+            Obj_AI_Base target = null)
         {
-            var skillshot = new Skillshot(detectionType, spellData, startT, start, end, unit);
+            var skillshot = new Skillshot(detectionType, spellData, startT, start, end, unit, target);
 
             if (OnDetectSkillshot != null)
             {
@@ -260,8 +261,20 @@ namespace GodlikeSkillz.Evade
 
 
             //Trigger the skillshot detection callbacks.
-            TriggerOnDetectSkillshot(
-                DetectionType.ProcessSpell, spellData, Environment.TickCount - Game.Ping / 2, startPos, endPos, sender);
+            if (spellData.Targeted)
+            {
+                var target = args.Target as Obj_AI_Base;
+                if (target != null)
+                    TriggerOnDetectSkillshot(
+                        DetectionType.ProcessSpell, spellData, Environment.TickCount - Game.Ping / 2, startPos, endPos,
+                        sender, target);
+            }
+            else
+            {
+                TriggerOnDetectSkillshot(
+                    DetectionType.ProcessSpell, spellData, Environment.TickCount - Game.Ping / 2, startPos, endPos,
+                    sender);
+            }
         }
 
         /// <summary>
