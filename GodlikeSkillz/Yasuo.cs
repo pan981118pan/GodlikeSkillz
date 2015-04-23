@@ -182,7 +182,7 @@ namespace GodlikeSkillz
                         {
                             DashToLoc(Prediction.GetPrediction(YTarget, 0.4f).UnitPosition, dashList, false);
                             var pLoc = Prediction.GetPrediction(YTarget, 0.1f, 175, 600).UnitPosition;
-                            MoveTo(pLoc);
+                            MoveTo(pLoc, Orbwalking.GetRealAutoAttackRange(YTarget) / 2);
                         }
                         else if(AttackReadiness > 0.3)
                         {
@@ -192,8 +192,9 @@ namespace GodlikeSkillz
                 }
                 else
                 {
+                    CanMove = true;
                     Orbwalker.SetAttack(false);
-                    MoveTo(targetLoc);
+                    MoveTo(targetLoc, 100);
                     DashToLoc(targetLoc, dashList, false);           
                 }
             }
@@ -239,7 +240,7 @@ namespace GodlikeSkillz
 
             if (Q1.IsReady() && GetValue<bool>("UseQL") && !ETar.IsValidTarget() && !Player.IsDashing() && !ECast && !ECasting)
             {
-                foreach (var minions in vMinions.Where(minions => minions.IsValidTarget(HasWhirlwind() ? Q2.Range : Q1.Range) && minions.Health < Player.GetSpellDamage(minions, SpellSlot.Q) && (AttackNow || !Orbwalker.InAutoAttackRange(minions))).OrderBy(tar => tar.Health)) {
+                foreach (var minions in vMinions.Where(minions => minions.IsValidTarget(HasWhirlwind() ? Q2.Range : 475) && minions.Health < Player.GetSpellDamage(minions, SpellSlot.Q) && (AttackNow || !Orbwalker.InAutoAttackRange(minions))).OrderBy(tar => tar.Health)) {
                     if (ETar != null &&  ETar.ToString() == minions.ToString())
                     {
                         if (ETar.IsValidTarget() && GetSweepingBladeDamage(minions) < minions.Health)
