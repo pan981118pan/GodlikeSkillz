@@ -174,8 +174,8 @@ namespace GodlikeSkillz
                 Orbwalker.SetMovement(false);
                 if (YTarget.IsValidTarget())
                 {
-                    if (Orbwalker.GetTarget().IsValidTarget() && Orbwalker.GetTarget().NetworkId == YTarget.NetworkId)
-                        Orbwalker.SetAttack(true);
+                    if (Orbwalker.GetTarget().IsValidTarget())
+                        Orbwalker.SetAttack(Orbwalker.GetTarget().NetworkId == YTarget.NetworkId);
                     if (Orbwalking.CanMove(50))
                     {
                         if (!Orbwalker.InAutoAttackRange(YTarget))
