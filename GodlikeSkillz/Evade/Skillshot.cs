@@ -180,7 +180,7 @@ namespace GodlikeSkillz.Evade
             {
                 return Environment.TickCount <=
                    StartTick + SpellData.Delay + SpellData.ExtraDuration +
-                   1000 * (Start.Distance(Target.Position) / SpellData.MissileSpeed);
+                   1000 * (Start.Distance(Target) / SpellData.MissileSpeed);
             }
 
             return Environment.TickCount <=

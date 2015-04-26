@@ -27,6 +27,7 @@ namespace GodlikeSkillz
         private Obj_AI_Base ETar;
         public Obj_AI_Base YTarget;
         //private string textl;
+        //private Obj_AI_Base champ;
 
         public Yasuo()
         {
@@ -84,7 +85,7 @@ namespace GodlikeSkillz
                 var targetItem = GetValue<Circle>("Target");
                 if (cursorItem.Active)
                     Render.Circle.DrawCircle(Game.CursorPos, GetValue<Slider>("Cirsize").Value, cursorItem.Color);
-                if (targetItem.Active)
+                if (targetItem.Active && YTarget != null)
                     Render.Circle.DrawCircle(YTarget.Position, 75, targetItem.Color);
             }
         }
@@ -109,9 +110,10 @@ namespace GodlikeSkillz
 
         public override void Game_OnGameUpdate(EventArgs args)
         {
-            /*Drawing.DrawText(
-                    Drawing.WorldToScreen(Player.Position)[0] + 50,
-                    Drawing.WorldToScreen(Player.Position)[1] - 20, Color.Yellow, "" + textl);*/
+            /*if (champ != null)
+            Drawing.DrawText(
+                    Drawing.WorldToScreen(champ.Position)[0] + 50,
+                    Drawing.WorldToScreen(champ.Position)[1] - 20, Color.Yellow, "" + textl);*/
 
             EvadeDetectedSkillshots.RemoveAll(skillshot => !skillshot.IsActive());
             Evader();
@@ -132,7 +134,7 @@ namespace GodlikeSkillz
                     .Where(o => o.IsValidTarget(E.Range) && IsDashable(o) &&
                             (o.Type == GameObjectType.obj_AI_Hero || o.Type == GameObjectType.obj_AI_Minion)).ToList();
 
-            if (GetValue<bool>("UseQC") && (GetValue<KeyBind>("UseQHT").Active || ComboActive))
+            if (GetValue<bool>("UseQC") && (GetValue<KeyBind>("UseQHT").Active || ComboActive) && !GetValue<KeyBind>("Flee").Active)
             {
                 if (YTarget.IsValidTarget(HasWhirlwind() ? Q2.Range : Q1.Range))
                 {
@@ -150,6 +152,13 @@ namespace GodlikeSkillz
 
             var targetLoc = Game.CursorPos;
 
+            if (GetValue<KeyBind>("Flee").Active)
+            {
+                CanMove = true;
+                MoveTo(targetLoc, 100);
+                DashToLoc(targetLoc, dashList, true);             
+            }
+
             if (LaneClearActive)
             {
                 if (GetValue<StringList>("ELmode").SelectedIndex == 2)
@@ -163,7 +172,7 @@ namespace GodlikeSkillz
                 {
                     Q1.Cast(ETar);
                 }
-                YTarget = (TargetSelector.GetSelectedTarget() != null &&
+                YTarget = (TargetSelector.GetSelectedTarget().IsValidTarget() &&
                            TargetSelector.GetSelectedTarget().Distance(Game.CursorPos) <=
                            GetValue<Slider>("Cirsize").Value)
                     ? TargetSelector.GetSelectedTarget()
@@ -172,7 +181,7 @@ namespace GodlikeSkillz
                         Game.CursorPos);
                 Orbwalker.ForceTarget(YTarget);
                 Orbwalker.SetMovement(false);
-                if (YTarget.IsValidTarget())
+                if (YTarget != null && YTarget.IsValidTarget())
                 {
                     if (Orbwalker.GetTarget().IsValidTarget())
                         Orbwalker.SetAttack(Orbwalker.GetTarget().NetworkId == YTarget.NetworkId);
@@ -241,7 +250,7 @@ namespace GodlikeSkillz
             if (Q1.IsReady() && GetValue<bool>("UseQL") && !ETar.IsValidTarget() && !Player.IsDashing() && !ECast && !ECasting)
             {
                 foreach (var minions in vMinions.Where(minions => minions.IsValidTarget(HasWhirlwind() ? Q2.Range : 475) && minions.Health < Player.GetSpellDamage(minions, SpellSlot.Q) && (AttackNow || !Orbwalker.InAutoAttackRange(minions))).OrderBy(tar => tar.Health)) {
-                    if (ETar != null &&  ETar.ToString() == minions.ToString())
+                    if (ETar != null &&  ETar.NetworkId == minions.NetworkId)
                     {
                         if (ETar.IsValidTarget() && GetSweepingBladeDamage(minions) < minions.Health)
                         {
@@ -282,9 +291,10 @@ namespace GodlikeSkillz
                     var totalPercent = targets[0].Health / targets[0].MaxHealth * 100;
                     if (totalPercent <= rSPercent)
                     {
-                        if (KnockupTimeLeft(targets[0]) <= 0.5 && AlliesNearTarget(targets[0], 600))
+                        if (AlliesNearTarget(targets[0], 600))
                         {
-                            R.Cast();
+                            if (KnockupTimeLeft(targets[0]) <= 0.5)
+                                R.Cast();
                         }
                         else
                         {
@@ -299,9 +309,10 @@ namespace GodlikeSkillz
                     if (totalPercent <= rMPercent)
                     {
                         var lowestAirtime = targets.OrderBy(t => Game.Time - KnockupTimeLeft(t)).FirstOrDefault();
-                        if (lowestAirtime != null && KnockupTimeLeft(lowestAirtime) <= 0.5 && AlliesNearTarget(lowestAirtime, 600))
+                        if (lowestAirtime != null && AlliesNearTarget(lowestAirtime, 600))
                         {
-                            R.Cast();
+                            if (KnockupTimeLeft(lowestAirtime) <= 0.5)
+                                R.Cast();
                         }
                         else
                         {
@@ -365,7 +376,7 @@ namespace GodlikeSkillz
                 ObjectManager.Get<Obj_AI_Base>()
                     .FirstOrDefault(o => o.Distance(loc) < 350 && o.IsValidTarget()
                         && (o.Type == GameObjectType.obj_AI_Hero || (o.Type == GameObjectType.obj_AI_Minion && (GetValue<bool>("UseQCH") || LaneClearActive))) && 
-                        ((tar.ToString() == o.ToString() && tar.Health > GetSweepingBladeDamage(tar)) || tar.ToString() != o.ToString()));
+                        ((tar.NetworkId == o.NetworkId && tar.Health > GetSweepingBladeDamage(tar)) || tar.ToString() != o.ToString()));
             return unit != null;
         }
 
@@ -465,12 +476,14 @@ namespace GodlikeSkillz
                 return;
             }
 
-            if (W.IsReady() && skillshot.SpellData.Type != SkillShotType.SkillshotCircle ||
-                skillshot.SpellData.Type != SkillShotType.SkillshotRing)
+            if (W.IsReady() && skillshot != null)
             {
                 var isAboutToHitRange = GetValue<Slider>("wwdelay").Value;
-
-                if (GetValue<bool>("autoww" + "." + skillshot.SpellData.ChampionName + "." + skillshot.SpellData.Slot))
+                var flag =
+                    MenuWallsList.Where(ss => ss.SpellName == skillshot.SpellData.SpellName)
+                        .Select(ss => GetValue<bool>("autoww" + "." + ss.ChampionName + "." + ss.Slot))
+                        .FirstOrDefault();
+                if (flag)
                 {
                     if (skillshot.Target != null && skillshot.Target.IsMe)
                     {
@@ -543,15 +556,13 @@ namespace GodlikeSkillz
 
         public override bool MiscMenu(Menu config)
         {
-
+            config.AddItem(new MenuItem("Flee" + Id, "Flee").SetValue(new KeyBind(32, KeyBindType.Press)));
             config.AddItem(new MenuItem("autoww" + Id, "Use Auto Windwall")).SetValue(true);
             config.AddItem(new MenuItem("wwdelay" + Id, "Windwall NonDelay")).SetValue(new Slider(500, 150, 2000));
 
-            var enemies = ObjectManager.Get<Obj_AI_Hero>().Where(e => e.IsEnemy);
-
             foreach (
                 var spell in
-                    enemies.SelectMany(e1 => SpellDatabase.Spells.Where(s => s.ChampionName == e1.BaseSkinName)))
+                       HeroManager.Enemies.SelectMany(e1 => SpellDatabase.Spells.Where(s => s.ChampionName == e1.BaseSkinName)))
             {
                 // => Windwall
                 if (spell.CollisionObjects.Any(e2 => e2 == CollisionObjectTypes.YasuoWall))

@@ -251,8 +251,8 @@ namespace GodlikeSkillz
             else
             {
                 ObjectManager.Player.IssueOrder(GameObjectOrder.AttackTo, Game.CursorPos);
-                VirtualMouse.ShiftClick(Game.CursorPos);
-                ObjectManager.Player.IssueOrder(GameObjectOrder.AttackTo, Game.CursorPos);
+                //VirtualMouse.ShiftClick(Game.CursorPos);
+                //ObjectManager.Player.IssueOrder(GameObjectOrder.AttackTo, Game.CursorPos);
             }
         }
 

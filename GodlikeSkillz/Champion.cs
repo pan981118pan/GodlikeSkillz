@@ -161,8 +161,8 @@ namespace GodlikeSkillz
             var point = Player.ServerPosition +
                         ((Random.NextFloat(0.6f, 1) + 0.2f) * MinDistance) *
                         (pVector3.To2D() - Player.ServerPosition.To2D()).Normalized().To3D();
-            if(CanMove)
-            Player.IssueOrder(GameObjectOrder.MoveTo, point);
+            if (CanMove)
+                Player.IssueOrder(GameObjectOrder.MoveTo, point);
         }
     }
 }
