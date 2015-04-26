@@ -556,7 +556,7 @@ namespace GodlikeSkillz
 
         public override bool MiscMenu(Menu config)
         {
-            config.AddItem(new MenuItem("Flee" + Id, "Flee").SetValue(new KeyBind(32, KeyBindType.Press)));
+            config.AddItem(new MenuItem("Flee" + Id, "Flee").SetValue(new KeyBind(31, KeyBindType.Press)));
             config.AddItem(new MenuItem("autoww" + Id, "Use Auto Windwall")).SetValue(true);
             config.AddItem(new MenuItem("wwdelay" + Id, "Windwall NonDelay")).SetValue(new Slider(500, 150, 2000));
 
